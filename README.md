@@ -148,8 +148,37 @@ Replace region if needed according to your region.
 
 
 ---
+### Step 6 — Create variables.tf
 
-### Step 6 — Create main.tf
+Paste:
+```
+variable "ami_id" {
+  default = "ami-0c02fb55956c7d316"
+}
+
+variable "instance_type" {
+  default = "t2.micro"
+}
+```
+
+---
+
+### Step 7 — Create outputs.tf
+
+Paste:
+```
+output "instance_id" {
+  value = aws_instance.web_server.id
+}
+
+output "public_ip" {
+  value = aws_instance.web_server.public_ip
+}
+```
+
+---
+
+### Step 8 — Create main.tf
 
 Paste:
 ```
@@ -165,7 +194,7 @@ resource "aws_vpc" "lab_vpc" {
 
 ---
 
-### Step 7 — Create Public Subnet
+### Step 9 — Create Public Subnet
 
 Add below VPC in main.tf:
 ```
@@ -185,7 +214,7 @@ resource "aws_subnet" "public_subnet" {
 
 ---
 
-### Step 8 — Create Internet Gateway
+### Step 10 — Create Internet Gateway
 
 Add in main.tf:
 ```
@@ -201,7 +230,7 @@ resource "aws_internet_gateway" "igw" {
 
 ---
 
-### Step 9 — Create Route Table
+### Step 11 — Create Route Table
 
 Add in main.tf:
 ```
@@ -224,7 +253,7 @@ resource "aws_route_table" "public_rt" {
 
 ---
 
-### Step 10 — Associate Subnet
+### Step 12 — Associate Subnet
 
 Add in main.tf:
 ```
@@ -238,7 +267,7 @@ resource "aws_route_table_association" "rta" {
 
 ---
 
-### Step 11 — Create Security Group
+### Step 13 — Create Security Group
 
 Add in main.tf:
 ```
@@ -287,7 +316,7 @@ resource "aws_security_group" "web_sg" {
 
 ---
 
-### Step 12 — Create Key Pair
+### Step 14 — Create Key Pair
 
 AWS Console:
 
@@ -308,7 +337,7 @@ Keep safe in terraform-aws-infra folder.
 
 ---
 
-### Step 13 — Get Ubuntu AMI
+### Step 15 — Get Ubuntu AMI
 
 Open:
 
@@ -327,7 +356,7 @@ Cancel instance launch.
 
 ---
 
-### Step 14 — Create EC2 Resource
+### Step 16 — Create EC2 Resource
 
 Add to main.tf:
 ```
@@ -358,7 +387,7 @@ with your actual AMI.
 
 
 ---
-### Step 15 — Initialize Terraform on your command prompt
+### Step 17 — Initialize Terraform on your command prompt
 
 Inside project folder:
 
@@ -371,7 +400,7 @@ Expected:
 
 ---
 
-### Step 16 — Validate
+### Step 18 — Validate
 
 `terraform validate`
 
@@ -382,7 +411,7 @@ Expected:
 
 ---
 
-### Step 17 — Plan
+### Step 19 — Plan
 
 `terraform plan`
 
@@ -398,7 +427,7 @@ Terraform will show:
 
 ---
 
-### Step 18 — Deploy
+### Step 20 — Deploy
 
 `terraform apply`
 
@@ -411,7 +440,7 @@ Terraform starts building AWS resources automatically 🚀
 
 ---
 
-### Step 19 — Verify
+### Step 21 — Verify
 
 AWS Console:
 
@@ -427,7 +456,7 @@ Everything should exist.
 
 ---
 
-### Step 20 — SSH on cmd prompt
+### Step 22 — SSH on cmd prompt
 
 `ssh -i terraform-key.pem ubuntu@PUBLIC_IP`
 
@@ -436,7 +465,7 @@ Success 🎉
 
 ---
 
-### Step 21 — Destroy Resources
+### Step 23 — Destroy Resources
 
 Very important to avoid charges:
 
